@@ -1,0 +1,30 @@
+import { useState } from 'react'
+import reactLogo from './assets/react.svg'
+import viteLogo from '/vite.svg'
+import './App.css'
+import { CreateTodo } from './components/CreateTodo'
+import { Todos } from './components/Todos'
+
+function App() {
+  const [todos,setTodos]=useState([]);
+
+  fetch("http://localhost:3000/todos")
+  .then(async function(res){
+    const json=await res.json();
+    console.log("response body",res.body);
+    console.log("response json",json);
+    setTodos(json)
+  })
+
+  return (
+    <>
+      <div>
+        {console.log("came to return part in app.jsx")};
+        <CreateTodo></CreateTodo>
+        <Todos todos={todos}></Todos>
+      </div>
+    </>
+  )
+}
+
+export default App
