@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useMousePointer } from "./hooks/useMousePointer";
+import { useCounter } from "./hooks/useCounter";
+import { useDebouncing } from "./hooks/useDebouncing";
 
 function App() {
   //     const { todos, loading } = useTodos(5);
@@ -16,13 +18,32 @@ function App() {
   //     if(isOnline)return <div>You are back online</div>
   //     return <div>You are offline!!!!</div>
 
-  const mousePointer = useMousePointer();
+  // const mousePointer = useMousePointer();
 
-  return (
-    <>
-      Your mouse position is {mousePointer.x} {mousePointer.y}
-    </>
-  );
+  // return (
+  //   <>
+  //     Your mouse position is {mousePointer.x} {mousePointer.y}
+  //   </>
+  // );
+
+  // const count=useCounter(2);
+  // return <div>
+  //   Timer is {count}
+  // </div>
+
+  const [filter,setfilter]=useState("");
+  const debouncedValue=useDebouncing(filter,2);
+
+  // whenever the debounced value changes, hit the backend 
+  // useEffect(()=>{
+  //   fetch("")
+  // },[debouncedValue])
+  return <div>
+
+    <input type="text" onChange={(event)=>{
+      setfilter(event.target.value)
+    }}/>
+  </div>
 }
 
 function Track({ todo }) {
